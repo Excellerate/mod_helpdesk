@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="module" version="3.1.0" client="site" method="upgrade">
+  <name>Help Desk</name>
+  <author>CodeChap</author>
+  <version>0.0.1</version>
+  <description>Allows users to ask a question.</description>
+  <files>
+    <folder>tmpl</folder>
+    <folder>helper</folder>
+    <filename>mod_helpdesk.xml</filename>
+    <filename module="mod_helpdesk">mod_helpdesk.php</filename>
+    <filename>index.html</filename>
+    <filename>helper/db.php</filename>
+    <filename>helper/mailer.php</filename>
+    <filename>tmpl/default.php</filename>
+    <filename>tmpl/index.html</filename>
+  </files>
+  <config>
+    <fields name="params">
+        <fieldset name="basic">
+          <field name="template" label="Template" type="editor" width="300" filter="safehtml" required="true" default="{{ form }}" />
+        </fieldset>
+        <fieldset name="settings" label="Settings">
+          <field name="heading" label="Module heading" type="text" required="false" default="" />
+          <field name="subheading" label="Module sub heading" type="text" required="false" default="" />
+        </fieldset>
+        <fieldset name="fields" label="Fields">
+          <field name="name" label="Request Name" type="checkbox" required="false" default="0" />
+          <field name="number" label="Request Number" type="checkbox" required="false" default="0" />
+          <field name="email" label="Request Email" type="checkbox" required="false" default="0" />
+        </fieldset>
+        <fieldset name="emails" label="Email Settings">
+          <field name="subject" type="text" label="Subject" description="Subject line to use in the email" required="true" size="30" class="inputbox" />
+          <field name="to_a" type="email" label="To" description="COM_ADMIN_USER_FIELD_EMAIL_DESC" required="true" size="30" class="inputbox" validate="email" />
+          <field name="to_b" type="email" label="To" description="COM_ADMIN_USER_FIELD_EMAIL_DESC" required="false" size="30" class="inputbox" validate="email" />
+          <field name="to_c" type="email" label="To" description="COM_ADMIN_USER_FIELD_EMAIL_DESC" required="false" size="30" class="inputbox" validate="email" />
+          <field name="cc_a" type="email" label="Cc" description="COM_ADMIN_USER_FIELD_EMAIL_DESC" required="false" size="30" class="inputbox" validate="email" />
+          <field name="cc_b" type="email" label="Cc" description="COM_ADMIN_USER_FIELD_EMAIL_DESC" required="false" size="30" class="inputbox" validate="email" />
+          <field name="cc_c" type="email" label="Cc" description="COM_ADMIN_USER_FIELD_EMAIL_DESC" required="false" size="30" class="inputbox" validate="email" />
+          <field name="bcc_a" type="email" label="Bcc" description="COM_ADMIN_USER_FIELD_EMAIL_DESC" required="false" size="30" class="inputbox" validate="email" />
+          <field name="bcc_b" type="email" label="Bcc" description="COM_ADMIN_USER_FIELD_EMAIL_DESC" required="false" size="30" class="inputbox" validate="email" />
+          <field name="bcc_c" type="email" label="Bcc" description="COM_ADMIN_USER_FIELD_EMAIL_DESC" required="false" size="30" class="inputbox" validate="email" />
+        </fieldset>
+      </fields>
+  </config>
+  <updateservers>
+    <server type="extension" name="Helpdesk" priority="1">http://www.github.com/codechap/mod_helpdesk/update.xml</server>
+  </updateservers>
+  <scriptfile>script.php</scriptfile>
+</extension>
