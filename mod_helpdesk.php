@@ -12,6 +12,22 @@
 // No direct access
 defined('_JEXEC') or die;
 
+// Find category ID
+if(JRequest::getVar('option')=='com_content'){
+  
+  if(JRequest::getVar('view')=='article'){
+    $catid = JRequest::getInt('catid');
+  }
+
+  elseif(JRequest::getVar('view')=='category'){
+    $catid = JRequest::getInt('id');
+  }
+}
+
+if($catid !== 20){
+  return false;
+}
+
 // Load vendors
 include 'vendor/autoload.php';
 

@@ -23,6 +23,7 @@
         <fieldset name="settings" label="Settings">
           <field name="heading" label="Module heading" type="text" required="false" default="" />
           <field name="subheading" label="Module sub heading" type="text" required="false" default="" />
+          <field name="category" label="Category ID" description="Will only show up under this category" type="text" required="true" default="" />
         </fieldset>
         <fieldset name="fields" label="Fields">
           <field name="name" label="Request Name" type="checkbox" required="false" default="0" />
