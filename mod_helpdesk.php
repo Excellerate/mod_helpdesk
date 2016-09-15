@@ -6,6 +6,7 @@
  * @package    Joomla
  * @subpackage Modules
  * @license    MIT
+ * @link
  *     
  */
  
@@ -28,11 +29,8 @@ if($catid !== 20){
   return false;
 }
 
-// Load vendors
-include 'vendor/autoload.php';
-
 // Load helpers
-include 'helpers/db.php';
+include 'helpers/database.php';
 include 'helpers/mailer.php';
 
 // Gather FuelPHP
@@ -64,35 +62,18 @@ if($post = JRequest::getVar('helpdesk', false, 'post')){
   $result = $val->run($post);
   if($result->isValid()){
 
-    // Save data
-    //QueryHelperDB::save($post);
+    // Save data and check token
+    if(QueryHelperDatabase::save($post)){
 
-    // Email data
-    QueryHelperMailer::send(
-      array(
-        $params->get('to_a'), 
-        $params->get('to_b'), 
-        $params->get('to_c')
-      ),
-      array(
-        $params->get('cc_a'), 
-        $params->get('cc_b'), 
-        $params->get('cc_c')
-      ),
-      array(
-        $params->get('bcc_a'), 
-        $params->get('bcc_b'), 
-        $params->get('bcc_c')
-      ),
-      $params->get('subject'),
-      $post
-    );
+      // Email data
+      QueryHelperMailer::send($params, $post);
 
-    // We done
-    print '<div class="ui message"><i class="ui circular checkmark icon"></i>Sent successfully, we will be in touch.</div>';
+      // We done
+      print '<div class="ui message"><i class="ui circular checkmark icon"></i>Sent successfully, we look forward to answering your question.</div>';
 
-    // Message
-    //JFactory::getApplication()->enqueueMessage('Please check that all required fields have been completed.', 'success');
+      // Dont show the formn
+      return null;
+    }
   }
 }
 
